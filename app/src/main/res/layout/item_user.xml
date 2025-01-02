@@ -14,7 +14,6 @@
         android:padding="16dp"
         android:background="@android:color/white">
 
-        <!-- User Info Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,7 +50,15 @@
                 android:layout_marginStart="8dp" />
         </LinearLayout>
 
-        <!-- Divider -->
+
+        <TextView
+            android:id="@+id/tvUserEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

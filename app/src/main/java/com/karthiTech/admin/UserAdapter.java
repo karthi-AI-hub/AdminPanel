@@ -45,7 +45,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
         holder.nameTextView.setText(user.getName());
         holder.emailTextView.setText(user.getPhone());
-
+        holder.userEmail.setText(user.getEmail());
         holder.selectCheckbox.setOnCheckedChangeListener(null);
         holder.selectCheckbox.setChecked(selectedUserIds.contains(user.getPhone()));
 
@@ -78,6 +78,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     static class UserViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView;
         TextView emailTextView;
+        TextView userEmail;
         CheckBox selectCheckbox;
         TextView lastLoginTextView;
 
@@ -85,6 +86,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             super(itemView);
             nameTextView = itemView.findViewById(R.id.nameTextView);
             emailTextView = itemView.findViewById(R.id.emailTextView);
+            userEmail = itemView.findViewById(R.id.tvUserEmail);
             selectCheckbox = itemView.findViewById(R.id.selectCheckbox);
             lastLoginTextView = itemView.findViewById(R.id.lastLoginTextView);
         }

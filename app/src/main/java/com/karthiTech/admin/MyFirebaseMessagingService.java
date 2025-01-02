@@ -42,7 +42,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Cashsify Notification")
                 .setContentText(message)
-                .setSmallIcon(R.drawable.ic_notification)
+//                .setSmallIcon(R.drawable.ic_notification)
                 .setAutoCancel(true);  // Automatically remove notification after tapping
 
         // Show the notification

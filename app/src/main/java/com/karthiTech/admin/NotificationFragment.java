@@ -90,7 +90,7 @@ public class NotificationFragment extends Fragment {
         Notification notification = new Notification.Builder(getActivity(), "default")
                 .setContentTitle("Cashsify Notification")
                 .setContentText(message)
-                .setSmallIcon(R.drawable.ic_notification)
+//                .setSmallIcon(R.drawable.ic_notification)
                 .build();
 
         notificationManager.notify(1, notification);
