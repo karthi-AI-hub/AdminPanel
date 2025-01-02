@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="@android:color/white"
+    android:layout_margin="4dp"
+    android:elevation="2dp">
+
+    <TextView
+        android:id="@+id/tvUserId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="User ID"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvCashToday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cash Today" />
+
+    <TextView
+        android:id="@+id/tvCashTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cash Total" />
+
+    <TextView
+        android:id="@+id/tvCompletedTasks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tasks Completed" />
+
+    <TextView
+        android:id="@+id/tvReferToday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Refer Today" />
+
+    <TextView
+        android:id="@+id/tvReferTotal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Refer Total" />
+</LinearLayout>

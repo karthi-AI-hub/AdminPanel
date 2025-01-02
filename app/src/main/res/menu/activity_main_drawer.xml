@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/icon_dashboard"
+            android:title="Dashboard" />
+
+        <item
+            android:id="@+id/nav_user"
+            android:icon="@drawable/icon_person"
+            android:title="Users" />
+
+        <item
+            android:id="@+id/nav_earnings"
+            android:icon="@drawable/icon_wallet"
+            android:title="Earnings" />
+
+        <item
+            android:id="@+id/nav_payments"
+            android:icon="@drawable/icon_bank"
+            android:title="Payments" />
+
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/icon_settings"
+            android:title="Settings" />
+        <item
+            android:id="@+id/nav_msg"
+            android:icon="@android:drawable/stat_notify_chat"
+            android:iconTint="@color/black"
+            android:title="Notification" />
+    </group>
+</menu>

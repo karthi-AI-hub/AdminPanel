@@ -1,0 +1,77 @@
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="@android:color/white">
+
+        <!-- User ID -->
+        <TextView
+            android:id="@+id/tvuserID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User ID: 9688976383"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingBottom="4dp" />
+
+        <!-- Transaction Details -->
+        <TextView
+            android:id="@+id/tvTransId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Transaction: #12345"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:id="@+id/textAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Amount: ₹150"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:id="@+id/textStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Status: Pending"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:paddingBottom="4dp" />
+
+        <TextView
+            android:id="@+id/textTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time: 02-Jan-2025 10:28 AM"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:paddingBottom="8dp" />
+
+        <!-- Approve Button -->
+        <Button
+            android:id="@+id/buttonApprove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Approve"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@android:color/white"
+            android:padding="8dp"
+            android:elevation="4dp" />
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
