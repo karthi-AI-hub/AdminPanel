@@ -1,5 +1,6 @@
 package com.karthiTech.admin;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,14 +44,24 @@ public class PaymentsAdapter extends RecyclerView.Adapter<PaymentsAdapter.Paymen
         holder.userId.setText("User Id : " + payment.getParentUserId());
         holder.transactionId.setText("Transaction : " + payment.getId());
         holder.amountTextView.setText("Amount: ₹" + payment.getAmount());
+        holder.upiTextView.setText("UPI ID: " + payment.getUpiId());
         holder.statusTextView.setText("Status: " + payment.getStatus());
         holder.timeTextView.setText("Time: " + formattedTime);
 
         if("Completed".equals(payment.getStatus())){
             holder.approveButton.setVisibility(View.GONE);
-        }else {
+            holder.rejectButton.setVisibility(View.GONE);
+            holder.statusTextView.setBackgroundColor(android.graphics.Color.GREEN);
+        } else if ("Failed".equals(payment.getStatus())) {
+            holder.approveButton.setVisibility(View.GONE);
+            holder.rejectButton.setVisibility(View.GONE);
+            holder.statusTextView.setBackgroundColor(android.graphics.Color.RED);
+        } else {
+            holder.statusTextView.setBackgroundColor(Color.WHITE);
             holder.approveButton.setVisibility(View.VISIBLE);
-            holder.approveButton.setOnClickListener(v -> paymentClickListener.onPaymentClick(payment));
+            holder.rejectButton.setVisibility(View.VISIBLE);
+            holder.approveButton.setOnClickListener(v -> paymentClickListener.onPaymentClick(payment, "Completed"));
+            holder.rejectButton.setOnClickListener(v -> paymentClickListener.onPaymentClick(payment, "Failed"));
         }
     }
 
@@ -60,8 +71,9 @@ public class PaymentsAdapter extends RecyclerView.Adapter<PaymentsAdapter.Paymen
     }
 
     public static class PaymentViewHolder extends RecyclerView.ViewHolder {
-        TextView userId, transactionId, amountTextView, statusTextView, timeTextView;
+        TextView userId, transactionId, amountTextView, statusTextView, timeTextView, upiTextView;
         Button approveButton;
+        Button rejectButton;
 
         public PaymentViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,11 +83,13 @@ public class PaymentsAdapter extends RecyclerView.Adapter<PaymentsAdapter.Paymen
             statusTextView = itemView.findViewById(R.id.textStatus);
             timeTextView = itemView.findViewById(R.id.textTime);
             approveButton = itemView.findViewById(R.id.buttonApprove);
+            rejectButton = itemView.findViewById(R.id.buttonReject);
+            upiTextView = itemView.findViewById(R.id.textUPI);
         }
     }
 
     public interface OnPaymentClickListener {
-        void onPaymentClick(Payment payment);
+        void onPaymentClick(Payment payment, String completed);
     }
 
     private String formatTimestampToDate(Timestamp timestamp) {

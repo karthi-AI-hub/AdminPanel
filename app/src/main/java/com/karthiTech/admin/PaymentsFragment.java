@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.karthiTech.admin.databinding.FragmentPaymentsBinding;
@@ -62,17 +61,50 @@ public class PaymentsFragment extends Fragment {
                 .addOnFailureListener(e -> Toast.makeText(getContext(), "Error loading payments: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
-    private void performAdminAction(Payment payment) {
-        firestore.collection("Payments")
-                .document(payment.getParentUserId())
-                .collection("Withdrawals")
-                .document(payment.getId())
-                .update("status", "Completed")
-                .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(getContext(), "Payment approved!", Toast.LENGTH_SHORT).show();
-                    loadPayments();
-                })
-                .addOnFailureListener(e -> Toast.makeText(getContext(), "Error approving payment: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+    private void performAdminAction(Payment payment, String status) {
+        if ("Completed".equals(status)) {
+            firestore.collection("Payments")
+                    .document(payment.getParentUserId())
+                    .collection("Withdrawals")
+                    .document(payment.getId())
+                    .update("status", "Completed")
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(getContext(), "Payment Approved!", Toast.LENGTH_SHORT).show();
+                        loadPayments();
+                    })
+                    .addOnFailureListener(e -> Toast.makeText(getContext(), "Error approving payment: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+        } else if ("Failed".equals(status)) {
+            firestore.collection("Payments")
+                    .document(payment.getParentUserId())
+                    .collection("Withdrawals")
+                    .document(payment.getId())
+                    .update("status", "Failed")
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(getContext(), "Payment Rejected!", Toast.LENGTH_SHORT).show();
+
+                        firestore.collection("Earnings")
+                                .document(payment.getParentUserId())
+                                .get()
+                                .addOnSuccessListener(documentSnapshot -> {
+                                    double currentCashTotal = documentSnapshot.getDouble("cashTotal") != null
+                                            ? documentSnapshot.getDouble("cashTotal")
+                                            : 0.0;
+
+                                    double updatedCashTotal = currentCashTotal + (payment.getAmount()*100);
+
+                                    firestore.collection("Earnings")
+                                            .document(payment.getParentUserId())
+                                            .update("cashTotal", updatedCashTotal)
+                                            .addOnSuccessListener(aVoid1 -> {
+                                                Toast.makeText(getContext(), "Amount added back to user's balance.", Toast.LENGTH_SHORT).show();
+                                                loadPayments();
+                                            })
+                                            .addOnFailureListener(e -> Toast.makeText(getContext(), "Error updating user's balance: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                                })
+                                .addOnFailureListener(e -> Toast.makeText(getContext(), "Error fetching user's balance: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                    })
+                    .addOnFailureListener(e -> Toast.makeText(getContext(), "Error updating payment: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+        }
     }
 
     @Override
